@@ -6,4 +6,3 @@ For each possible root, we need to consider all sets of k distinct nodes, comput
 
 The approach used in this code is based on the tree structure after fixing one root, then using subtree sizes to help count how different root positions affect whether a node can contribute to the final answer.
 
-My main goal here was to keep the solution readable and show the problem-solving process clearly, rather than making the code overly complicated.
