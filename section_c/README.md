@@ -12,7 +12,6 @@ The project includes:
 
 
 
-
 ## Features
 
 ### Summary Page
@@ -64,10 +63,9 @@ You can then navigate to the analysis page from the summary page.
 
 ## Notes
 
-The uploaded CMS facility file is a snapshot-style dataset rather than a true monthly time series for facility mortality.
+The uploaded CMS facility file is a snapshot-style dataset rather than a true monthly time series for facility mortality. Therefore, the dashboard focuses on valid cross-sectional comparisons by state, ZIP code, distribution, and facility ranking.
 
-Date-related fields were parsed and reviewed during data preparation, but they do not support a reliable month-level mortality trend analysis.
-
+Date-related fields were parsed and reviewed during data preparation, but they do not support a reliable month-level mortality trend for this specific file. To avoid presenting a misleading chart, the dashboard does not include a monthly mortality trend analysis
 
 ## Goal
 
