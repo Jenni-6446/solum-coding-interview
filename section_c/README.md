@@ -67,6 +67,3 @@ The uploaded CMS facility file is a snapshot-style dataset rather than a true mo
 
 Date-related fields were parsed and reviewed during data preparation, but they do not support a reliable month-level mortality trend for this specific file. To avoid presenting a misleading chart, the dashboard does not include a monthly mortality trend analysis
 
-## Goal
-
-The main goal of this section is to provide a simple and clear dashboard with correct filtering and aggregation logic.
