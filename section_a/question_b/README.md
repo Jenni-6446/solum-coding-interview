@@ -6,13 +6,12 @@ This notebook analyses model-level price elasticity based on the relationship be
 ## File
 - `QuestionB.ipynb`
 
-## How to run
-Open the notebook and make sure the dataset is available at:
+## Dataset
+The dataset used in this analysis is also included in the repository:
 
 `../../data/bmw_global_sales_2018_2025.csv`
 
-## Output
-The notebook includes:
-- model-level elasticity estimates,
-- GDP-level comparison,
-- selected diagnostic visualisations.
+## Running Notes
+This notebook was originally developed and executed in Google Colab using a Google Drive file path.
+
+The `data/` folder contains the same dataset for reference.
