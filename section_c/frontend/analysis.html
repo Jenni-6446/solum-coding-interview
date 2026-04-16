@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialysis Mortality Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="page-shell analysis-shell">
+        <header class="page-header">
+            <div class="page-header-copy">
+                <h1>Dialysis Mortality Analysis</h1>
+                <p class="page-subtitle">
+                    Comparison dashboard for state patterns, ZIP-level differences, distribution and ranking.
+                </p>
+            </div>
+
+            <div class="page-header-actions">
+                <button id="exportBtn" type="button" class="btn btn-success">Export CSV</button>
+                <a id="summaryPageLink" class="btn btn-secondary" href="index.html">Back to Summary</a>
+            </div>
+        </header>
+
+        <section id="analysisFilterToolbar" class="analysis-toolbar is-hidden">
+            <div class="dashboard-panel analysis-toolbar-panel">
+                <p id="activeFilterText" class="toolbar-text"></p>
+                <div id="activeFilterChips" class="active-filter-chips"></div>
+            </div>
+        </section>
+
+        <section class="summary-cards summary-cards-4 analysis-kpi-row">
+            <div class="card stat-card">
+                <p class="metric-label">Total Facilities</p>
+                <p id="analysisTotalValue" class="metric-value">-</p>
+                <p class="metric-footnote">With valid mortality values under the current filters</p>
+            </div>
+
+            <div class="card stat-card">
+                <p class="metric-label">Average Mortality</p>
+                <p id="analysisAvgValue" class="metric-value">-</p>
+                <p class="metric-footnote">Average facility mortality rate for valid rows</p>
+            </div>
+
+            <div class="card stat-card">
+                <p class="metric-label">Min Mortality</p>
+                <p id="analysisMinValue" class="metric-value">-</p>
+                <p class="metric-footnote">Lowest valid facility mortality value</p>
+            </div>
+
+            <div class="card stat-card">
+                <p class="metric-label">Max Mortality</p>
+                <p id="analysisMaxValue" class="metric-value">-</p>
+                <p class="metric-footnote">Highest valid facility mortality value</p>
+            </div>
+        </section>
+
+        <section class="analysis-grid">
+            <div class="dashboard-panel table-card state-table-card">
+                <div class="table-header-bar">
+                    <div>
+                        <h2>State Comparison</h2>
+                        <p id="stateTableSubtitle" class="muted-text">
+                            Selected states ranked by average facility mortality rate.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper state-table-wrapper">
+                    <table class="data-table state-comparison-table">
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th class="numeric">Avg Mortality</th>
+                                <th class="numeric">Facilities</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stateComparisonBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-panel chart-card">
+                <div class="chart-card-header">
+                    <div>
+                        <h2>Mortality by ZIP Code</h2>
+                        <p id="zipChartSubtitle" class="chart-subtitle">
+                            Top ZIP codes ranked by average mortality rate
+                        </p>
+                    </div>
+                </div>
+                <div id="zipChartEmpty" class="chart-empty">No data found for the current filters.</div>
+                <canvas id="zipChart"></canvas>
+            </div>
+
+            <div class="dashboard-panel chart-card">
+                <div class="chart-card-header">
+                    <div>
+                        <h2>Mortality Distribution</h2>
+                        <p class="chart-subtitle">Facility count across mortality rate ranges</p>
+                    </div>
+                </div>
+                <div id="distributionChartEmpty" class="chart-empty">No data found for the current filters.</div>
+                <canvas id="distributionChart"></canvas>
+            </div>
+
+            <div class="dashboard-panel table-card">
+                <div class="table-header-bar">
+                    <div>
+                        <h2>Facility Ranking Table</h2>
+                        <p id="rankingSubtitle" class="muted-text">
+                            Showing top facilities ranked by mortality rate.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper ranking-table-wrapper">
+                    <table class="data-table ranking-table">
+                        <thead>
+                            <tr>
+                                <th class="col-rank">#</th>
+                                <th class="col-facility">Facility Name</th>
+                                <th class="col-state">State</th>
+                                <th class="col-zip">ZIP Code</th>
+                                <th class="col-metric numeric">Mortality Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="analysis.js"></script>
+</body>
+</html>

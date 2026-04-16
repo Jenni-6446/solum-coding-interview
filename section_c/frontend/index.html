@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialysis Mortality Overview</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="page-header">
+            <div class="page-header-copy">
+                <h1>Dialysis Mortality Overview</h1>
+                <p class="page-subtitle">
+                    Summary dashboard for facility mortality analysis with KPI cards, rankings and a compact results table.
+                </p>
+            </div>
+
+            <div class="page-header-actions">
+                <span class="soft-badge">Facility-level snapshot</span>
+                <a id="analysisPageLink" class="btn btn-primary" href="analysis.html">Open Analysis</a>
+            </div>
+        </header>
+
+        <section class="dashboard-panel filter-bar-card">
+            <div class="card-header-row">
+                <div>
+                    <h2>Filters</h2>
+                    <p class="muted-text">
+                        Apply filters here first, then open the analysis page using the same result set.
+                    </p>
+                </div>
+            </div>
+
+            <div class="filter-bar-grid">
+                <div class="filter-item">
+                    <label for="stateDropdownBtn">State</label>
+                    <div class="custom-multi-select" id="stateDropdown">
+                        <button type="button" id="stateDropdownBtn" class="custom-multi-select-btn">
+                            Select states
+                        </button>
+
+                        <div id="stateDropdownMenu" class="custom-multi-select-menu">
+                            <div id="stateOptions"></div>
+                        </div>
+                    </div>
+                    <p class="filter-hint">
+                        You can select multiple states. Leave empty to include all states.
+                    </p>
+                </div>
+
+                <div class="filter-item">
+                    <label for="zipInput">ZIP Code</label>
+                    <input type="text" id="zipInput" placeholder="e.g. 770">
+                </div>
+
+                <div class="filter-item">
+                    <label for="facilityInput">Facility Name</label>
+                    <input type="text" id="facilityInput" placeholder="e.g. davita">
+                </div>
+            </div>
+
+            <div class="filter-bar-actions">
+                <div class="filter-actions">
+                    <button id="applyBtn" type="button" class="btn btn-primary">Apply Filters</button>
+                    <button id="resetBtn" type="button" class="btn btn-secondary">Reset</button>
+                    <button id="exportBtn" type="button" class="btn btn-success">Export CSV</button>
+                </div>
+
+                <div id="filterSummary" class="status-inline">Showing all facilities</div>
+            </div>
+        </section>
+
+        <section class="summary-cards summary-cards-4">
+            <div class="card stat-card">
+                <p class="metric-label">Total Facilities</p>
+                <p id="totalValue" class="metric-value">-</p>
+                <p class="metric-footnote">Matching the current filters</p>
+            </div>
+
+            <div class="card stat-card">
+                <p class="metric-label">Average Mortality</p>
+                <p id="avgValue" class="metric-value">-</p>
+                <p class="metric-footnote">Average facility mortality rate</p>
+            </div>
+
+            <div class="card stat-card">
+                <p class="metric-label">Min Mortality</p>
+                <p id="minValue" class="metric-value">-</p>
+                <p class="metric-footnote">Lowest observed facility value</p>
+            </div>
+
+            <div class="card stat-card">
+                <p class="metric-label">Max Mortality</p>
+                <p id="maxValue" class="metric-value">-</p>
+                <p class="metric-footnote">Highest observed facility value</p>
+            </div>
+        </section>
+
+        <section class="summary-two-col">
+            <div class="dashboard-panel list-card">
+                <div class="card-header-row">
+                    <div>
+                        <h2 id="highestTitle">Top Highest Mortality Facilities</h2>
+                        <p class="muted-text">Highest values under the current filters</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="compact-table">
+                        <thead>
+                            <tr>
+                                <th class="col-rank">#</th>
+                                <th>Facility</th>
+                                <th class="col-state">State</th>
+                                <th class="col-zip">ZIP</th>
+                                <th class="col-metric numeric">Mortality</th>
+                            </tr>
+                        </thead>
+                        <tbody id="highestTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-panel list-card">
+                <div class="card-header-row">
+                    <div>
+                        <h2 id="lowestTitle">Top Lowest Mortality Facilities</h2>
+                        <p class="muted-text">Lowest values under the current filters</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="compact-table">
+                        <thead>
+                            <tr>
+                                <th class="col-rank">#</th>
+                                <th>Facility</th>
+                                <th class="col-state">State</th>
+                                <th class="col-zip">ZIP</th>
+                                <th class="col-metric numeric">Mortality</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lowestTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-panel compact-table-card">
+            <div class="table-header-bar">
+                <div>
+                    <h2>Full Data Table</h2>
+                    <p class="muted-text" id="tableSummary">Showing current page results.</p>
+                </div>
+            </div>
+
+            <div class="table-wrapper scrollable-table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Facility Name</th>
+                            <th class="col-state">State</th>
+                            <th class="col-zip">ZIP Code</th>
+                            <th class="col-date">SMR Date</th>
+                            <th class="col-metric numeric">Mortality Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fullTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="pagination compact-pagination centered-pagination">
+                <button id="prevBtn" type="button" class="btn btn-primary">Previous</button>
+                <span id="pageInfo" class="page-info-inline">Page 1 of 1</span>
+                <button id="nextBtn" type="button" class="btn btn-primary">Next</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
