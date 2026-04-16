@@ -6,10 +6,10 @@ This notebook analyses the transition toward electrification across regions usin
 ## File
 - `QuestionA.ipynb`
 
-## How to run
-Open the notebook and make sure the dataset is available at:
+## Dataset
+The dataset used in this analysis is also included in the repository:
 
 `../../data/bmw_global_sales_2018_2025.csv`
 
-## Output
-The notebook includes data preparation, regional BEV trend analysis, and supporting visualisations.
+## Running Notes
+This notebook was originally developed and executed in Google Colab using a Google Drive file path.
