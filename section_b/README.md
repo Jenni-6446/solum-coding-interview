@@ -1,7 +1,9 @@
 # Section B
 
-I first tried to understand the original definition of the problem and then looked for a simpler counting approach.
+For this question, I first started by understanding the original definition carefully.
 
-This solution is based on subtree sizes and counting how different root positions affect whether a node can contribute to the final answer.
+For each possible root, we need to consider all sets of k distinct nodes, compute their LCA, and count how many different nodes can appear as LCAs. A direct brute-force solution would be too expensive, so I looked for a simpler counting idea.
 
-The code is kept simple and readable to show the problem-solving process clearly.
+The approach used in this code is based on the tree structure after fixing one root, then using subtree sizes to help count how different root positions affect whether a node can contribute to the final answer.
+
+My main goal here was to keep the solution readable and show the problem-solving process clearly, rather than making the code overly complicated.
